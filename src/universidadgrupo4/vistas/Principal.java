@@ -6,6 +6,7 @@
 package universidadgrupo4.vistas;
 
 import javax.swing.JOptionPane;
+import universidadgrupo4.modelos.Conexion;
 
 /**
  *
@@ -13,11 +14,15 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
+    Conexion conexion;
+    
     public Principal() {
         initComponents();
+        try{
+          conexion = new Conexion("jdbc:mysql://localhost/universidadgrupo4", "root", "");
+        } catch (ClassNotFoundException ex){
+            JOptionPane.showMessageDialog(null, "Error de driver");
+        }
     }
 
     /**
@@ -42,6 +47,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -95,14 +101,29 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem4.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jMenuItem4.setText("Alumnos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jMenuItem5.setText("Cargar nota");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jMenuItem6.setText("Inscripciones");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuBar1.add(jMenu2);
@@ -112,7 +133,21 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem7.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jMenuItem7.setText("Listado alumnos por materia");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
+
+        jMenuItem8.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jMenuItem8.setText("Listado materias por alumno");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem8);
 
         jMenuBar1.add(jMenu3);
 
@@ -142,11 +177,56 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         Principal.removeAll();
         Principal.repaint();
-        ViewMateria nuevo = new ViewMateria();
+        ViewMateria nuevo = new ViewMateria(conexion);
         nuevo.setVisible(true);
         Principal.add(nuevo);
         Principal.moveToFront(nuevo);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        Principal.removeAll();
+        Principal.repaint();
+        ViewAlumnoXMat nuevo = new ViewAlumnoXMat();
+        nuevo.setVisible(true);
+        Principal.add(nuevo);
+        Principal.moveToFront(nuevo);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        Principal.removeAll();
+        Principal.repaint();
+        ViewMatXAlumno nuevo = new ViewMatXAlumno();
+        nuevo.setVisible(true);
+        Principal.add(nuevo);
+        Principal.moveToFront(nuevo);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        Principal.removeAll();
+        Principal.repaint();
+        ViewCargaNotas nuevo = new ViewCargaNotas(conexion);
+        nuevo.setVisible(true);
+        Principal.add(nuevo);
+        Principal.moveToFront(nuevo);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Principal.removeAll();
+        Principal.repaint();
+        ViewAlumno nuevo = new ViewAlumno(conexion);
+        nuevo.setVisible(true);
+        Principal.add(nuevo);
+        Principal.moveToFront(nuevo);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        Principal.removeAll();
+        Principal.repaint();
+        ViewInscripciones nuevo = new ViewInscripciones(conexion);
+        nuevo.setVisible(true);
+        Principal.add(nuevo);
+        Principal.moveToFront(nuevo);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +276,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jbSalir;
     // End of variables declaration//GEN-END:variables
 }

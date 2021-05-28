@@ -11,9 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import universidadgrupo4.modelos.Conexion;
 import universidadgrupo4.modelos.Materia;
@@ -29,7 +26,7 @@ public class MateriaData {
         try{
             con = conexion.getConexion();
         }catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null,"error de conexion");
+           JOptionPane.showMessageDialog(null,"error de conexion materias");
         }
     }
      public void desactivarMateria(int id){
@@ -103,9 +100,36 @@ public class MateriaData {
             
             ps.close();
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"error de conexion");
+            JOptionPane.showMessageDialog(null,"error de conexion materiaData");
         }
          return materia; 
+    }
+      public ArrayList<Materia> obtenerMaterias(){
+           Materia materia;
+           ArrayList<Materia> materias = new ArrayList();
+            
+          try{ 
+            String sql="SELECT * FROM  materia";
+            PreparedStatement ps=con.prepareStatement(sql);
+            
+            ResultSet rs=ps.executeQuery();
+           
+            
+            while(rs.next()){
+              materia=new Materia();
+              materia.setNombreMateria(rs.getString("nombre"));
+              materia.setIdMateria((rs.getInt("idMateria")));
+              materia.setEstado(rs.getBoolean("estado"));
+              materia.setAnio(rs.getInt("año"));
+              materias.add(materia);
+            }
+                
+            
+            ps.close();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"error de conexion en materiaData");
+        }
+         return materias; 
     }
           
 }

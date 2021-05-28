@@ -1,4 +1,3 @@
-
 package universidadgrupo4.control;
 
 import java.sql.*;
@@ -6,26 +5,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.Date;
+import java.util.ArrayList;
 import universidadgrupo4.modelos.Alumno;
 import universidadgrupo4.modelos.Conexion;
 
-
-
-/**
- *
- * @author Usuario
- */
 public class AlumnoData {
     private Connection con;
     public AlumnoData(Conexion conexion){
         try{
             con = conexion.getConexion();
         }catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null,"error de conexion");
+           JOptionPane.showMessageDialog(null,"error de conexion alumnos");
         }
     }
     
-    public Alumno obtenerAlumno(int id){
+    public Alumno buscarAlumno(int id){
         Alumno alumno=null;
         try{
             String sql = "SELECT * FROM alumno WHERE idAlumno=?";
@@ -38,14 +32,43 @@ public class AlumnoData {
                 alumno = new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
                 alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellido(rs.getString("apellido"));
                 alumno.setFechaNac(rs.getDate("fechNac").toLocalDate());
+                alumno.setLegajo(rs.getInt("legajoDni"));
                 alumno.setEstado(rs.getBoolean("estado"));
             }
             ps.close();
         }catch(SQLException ex){
-           JOptionPane.showMessageDialog(null,"error de conexion");
+           JOptionPane.showMessageDialog(null,"error de conexion alumnoData");
         }
         return alumno;
+    }
+    public ArrayList<Alumno> obtenerAlumnos(){
+        Alumno alumno;
+        ArrayList <Alumno> alumnos = new ArrayList(); 
+        
+        try{
+            String sql = "SELECT * FROM alumno";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            
+            ResultSet rs=ps.executeQuery();
+            
+            while(rs.next()){
+                alumno = new Alumno();
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setFechaNac(rs.getDate("fechNac").toLocalDate());
+                alumno.setLegajo(rs.getInt("legajoDni"));
+                alumno.setEstado(rs.getBoolean("estado"));
+                alumnos.add(alumno);
+            }
+            ps.close();
+        }catch(SQLException ex){
+           JOptionPane.showMessageDialog(null,"error de conexion alumnoData");
+        }
+        return alumnos;
     }
     
     public void borrarAlumno(int id){
