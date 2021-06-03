@@ -208,6 +208,8 @@ public void borrarFilasTabla(){
         ));
         jScrollPane2.setViewportView(tMaterias);
 
+        jtBuscar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jtBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         jtBuscar.setText("Buscar");
         jtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,14 +286,8 @@ public void borrarFilasTabla(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Alumno> cbAlumnos;
-    private javax.swing.JComboBox<Materia> cbMaterias;
-    private javax.swing.JComboBox<Materia> cbMaterias1;
     private javax.swing.JComboBox<Materia> cbMaterias2;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JInternalFrame jInternalFrame3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

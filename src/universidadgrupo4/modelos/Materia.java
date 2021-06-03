@@ -31,8 +31,8 @@ public class Materia {
         return idMateria;
     }
 
-    public void setIdMateria(int id_materia) {
-        this.idMateria = id_materia;
+    public void setIdMateria(int idMateria) {
+        this.idMateria = idMateria;
     }
 
     public String getNombreMateria() {

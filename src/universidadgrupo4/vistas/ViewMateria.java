@@ -68,6 +68,7 @@ public class ViewMateria extends javax.swing.JInternalFrame {
 
         jbBuscar.setBackground(new java.awt.Color(51, 102, 255));
         jbBuscar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +77,7 @@ public class ViewMateria extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salvar.png"))); // NOI18N
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +86,7 @@ public class ViewMateria extends javax.swing.JInternalFrame {
         });
 
         jbBorrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         jbBorrar.setText("Borrar");
         jbBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +95,7 @@ public class ViewMateria extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +104,7 @@ public class ViewMateria extends javax.swing.JInternalFrame {
         });
 
         jbActualizar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/recargar.png"))); // NOI18N
         jbActualizar.setText("Actualizar");
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,17 +148,17 @@ public class ViewMateria extends javax.swing.JInternalFrame {
                             .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 47, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jbNuevo)
                 .addGap(26, 26, 26)
                 .addComponent(jbGuardar)
                 .addGap(18, 18, 18)
                 .addComponent(jbActualizar)
-                .addGap(32, 32, 32)
-                .addComponent(jbBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGap(18, 18, 18)
+                .addComponent(jbBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbSalir)
+                .addGap(25, 25, 25))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,7 +182,7 @@ public class ViewMateria extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,25 +203,21 @@ public class ViewMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        int id=0;
-        String nombre = null;
-        boolean val=false;
-        MateriaData nuevo = new MateriaData(con);
-        Materia mat = null;
-        
-        try {
-            id = Integer.parseInt(jtId.getText()) ;
-            val=true;
-        } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Campo incorrecto"); 
+        int id = 0;
+        try{
+         id= Integer.parseInt(jtId.getText()) ;
+        }catch (NumberFormatException e){
+           JOptionPane.showMessageDialog(this, "Campo ID incorrecto");
         }
-        
-        try {
-            mat = nuevo.buscarMateria(id);
+        MateriaData nuevo = new MateriaData(con);
+        Materia mat = nuevo.buscarMateria(id);
+           
+        if(mat != null){  
             jtNombre.setText(mat.getNombreMateria());
             jtAño.setText(String.valueOf(mat.getAnio()));
-        } catch (NullPointerException e){
+        } else{
             JOptionPane.showMessageDialog(this, "No se encuentra la materia");
+            limpiar();
         }
         
         
@@ -242,6 +243,7 @@ public class ViewMateria extends javax.swing.JInternalFrame {
             Materia mat = new Materia(nombre,año,true);
             nuevo.guardarMateria(mat);
             JOptionPane.showMessageDialog(this, "Materia agregada");
+            limpiar();
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -268,6 +270,7 @@ public class ViewMateria extends javax.swing.JInternalFrame {
             if (opcion==0) {
                 nuevo.desactivarMateria(id);
                 JOptionPane.showMessageDialog(this, "Materia desactivada");
+                limpiar();
             }
             
         } catch (NullPointerException e){
@@ -313,6 +316,11 @@ public class ViewMateria extends javax.swing.JInternalFrame {
        jtNombre.setText(null);
        jtId.requestFocus();
     }//GEN-LAST:event_jbNuevoActionPerformed
+    private void limpiar() {                                         
+        jtNombre.setText("");
+        jtAño.setText("");
+        jtId.setText("");
+    }                                        
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

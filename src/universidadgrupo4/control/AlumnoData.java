@@ -81,7 +81,8 @@ public class AlumnoData {
             ps.executeUpdate();
             ps.close();
         }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"error de conexion");
+            System.err.print(ex.getMessage());
+            JOptionPane.showMessageDialog(null,"No se puede borrar el alumno");
         }
     }
     

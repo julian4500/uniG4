@@ -79,10 +79,8 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
 
         jbBuscar.setBackground(new java.awt.Color(51, 102, 255));
         jbBuscar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         jbBuscar.setText("Buscar");
-        jbBuscar.setMaximumSize(new java.awt.Dimension(89, 31));
-        jbBuscar.setMinimumSize(new java.awt.Dimension(89, 31));
-        jbBuscar.setPreferredSize(new java.awt.Dimension(89, 31));
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -108,6 +106,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
 
         jbCambiar.setBackground(new java.awt.Color(51, 102, 255));
         jbCambiar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbCambiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/recargar.png"))); // NOI18N
         jbCambiar.setText("Actualizar");
         jbCambiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +116,10 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
 
         jbGuardar.setBackground(new java.awt.Color(51, 102, 255));
         jbGuardar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salvar.png"))); // NOI18N
         jbGuardar.setText("Guardar");
+        jbGuardar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
@@ -135,6 +137,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
 
         jbBorrar.setBackground(new java.awt.Color(51, 102, 255));
         jbBorrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jbBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
         jbBorrar.setText("Borrar");
         jbBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,8 +158,8 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
-                        .addComponent(jbCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
+                        .addComponent(jbCambiar)
+                        .addGap(35, 35, 35)
                         .addComponent(jbBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(84, 84, 84))
                     .addGroup(layout.createSequentialGroup()
@@ -211,7 +214,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                     .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,7 +228,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,6 +271,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                 jtFechaNac.setText(al.getFechNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             } else{
                 JOptionPane.showMessageDialog(this, "No se encuentra el alumno"); 
+                limpiar();
             }
         } catch (NullPointerException e){
             
@@ -296,19 +300,18 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
             Alumno al = new Alumno(legajo,nombre,apellido,fecha,true);
             nuevo.guardarAlumno(al);
             JOptionPane.showMessageDialog(this, "Alumno agregado");
+            limpiar();
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
         int id=0;
-        String nombre = null;
-        boolean val=false;
         AlumnoData nuevo = new AlumnoData(con);
         Alumno al = null;
         
         try {
             id = Integer.parseInt(jtId.getText()) ;
-            val=true;
+           
         } catch (NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Campo incorrecto"); 
         }
@@ -322,7 +325,9 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                 "\n Estas seguro?", "ATENCION", 2, JOptionPane.WARNING_MESSAGE);
                 if (opcion==0) {
                     nuevo.borrarAlumno(id);
+                    //aca me falta una condicion para que no mande el mensaje si no lo borra
                     JOptionPane.showMessageDialog(this, "Alumno dado de baja");
+                    limpiar();
                 }
             } else{
                 JOptionPane.showMessageDialog(this, "No se encuentra el alumno");
@@ -357,11 +362,21 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                     if (opcion==0) {
                         nuevo.actualizarAlumno(al, id);
                         JOptionPane.showMessageDialog(this, "Se ha modificado el alumno");
+                        limpiar();
                     }               
             }
         }
     }//GEN-LAST:event_jbCambiarActionPerformed
 
+    private void limpiar()
+    {
+        jtId.setText("");
+       jtNombre.setText("");
+       jtApellido.setText("");
+       jtLegajo.setText("");
+       jtFechaNac.setText("");
+       jtId.requestFocus();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -1,4 +1,4 @@
-package universidadgrupo4.modelos;
+   package universidadgrupo4.modelos;
 
 import java.time.LocalDate;
 
@@ -13,7 +13,8 @@ public class Alumno {
 
     public Alumno() {
     }
-
+    
+    //Constructor con idAlumno
     public Alumno(int idAlumno,int legajo, String nombre, LocalDate fechNac, boolean estado) {
         this.idAlumno = idAlumno;
         this.legajo = legajo;
